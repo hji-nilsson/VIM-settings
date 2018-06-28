@@ -5,6 +5,7 @@ My personal VIM settings. Linux version is not really updated since I mostly wor
 ## External tools
 
 CTAGS - http://prdownloads.sourceforge.net/ctags/ctags58.zip
+
 CScope - https://sourceforge.net/projects/cscope/files/cscope/15.4/
 
 ## Plugins

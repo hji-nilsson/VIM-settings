@@ -23,8 +23,8 @@ Dracula - https://github.com/dracula/vim
 - Extract CTAGS and CScope and add the location to the PATH environment variable
 - Change path of CScope binary in vimrc_
 - Install NERDtree
-  - Extract contents of directory ‘doc’ to: '<viminstallationdir>\vimXX\doc'
-  - Extract entire directory ‘nerdtree_plugin’ to '<viminstallationdir>\vimXX\'
+  - Extract contents of directory ‘doc’ to: '<i>VIMInstallationDir</i>\vimXX\doc'
+  - Extract entire directory ‘nerdtree_plugin’ to '<i>VIMInstallationDir</i>\vimXX\'
   - Extract cotents of directory ‘plugin’ to '<i>VIMInstallationDir</i>\vimXX\plugin\'
 - Download and extract dracula.vim to '<i>VIMInstallationDir</i>\vimXX\colors\'
 

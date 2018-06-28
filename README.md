@@ -25,8 +25,8 @@ Dracula - https://github.com/dracula/vim
 - Install NERDtree
   - Extract contents of directory ‘doc’ to: '<viminstallationdir>\vimXX\doc'
   - Extract entire directory ‘nerdtree_plugin’ to '<viminstallationdir>\vimXX\'
-  - Extract cotents of directory ‘plugin’ to '<viminstallationdir>\vimXX\plugin\'
-- Download and extract dracula.vim to '<viminstallationdir>\vimxx\colors\'
+  - Extract cotents of directory ‘plugin’ to '<i>VIMInstallationDir</i>\vimXX\plugin\'
+- Download and extract dracula.vim to '<i>VIMInstallationDir</i>\vimXX\colors\'
 
 ### Linux
 TBD

@@ -32,7 +32,8 @@ map <F5>t :cs find t <cword><CR>
 map <F5>d :cs find d <cword><CR>
 map <F6> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 map <C-F6> :let temp="tab stag ".expand('<cword>')<CR>:exec temp<CR>
-map <F9> :cscope kill 0 <CR> :!cscope -Rb <CR> :cs add .\ <CR>
+map <F9> :cscope kill 0 <CR> :silent !cscope -Rb <CR> :cs add .\ <CR>
+map <C-F9> :silent !ctags -R <CR>
 map <F11> :set number! <CR>
 map <F12> :set hls! <CR>
 map <S-LeftMouse> <LeftMouse><S-*>

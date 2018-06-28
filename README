@@ -26,6 +26,6 @@ Windows:
   - Extract entire directory ‘nerdtree_plugin’ to '<viminstallationdir>\vimXX\'
   - Extract cotents of directory ‘plugin’ to '<viminstallationdir>\vimXX\plugin\'
 - Download and extract dracula.vim to '<viminstallationdir>\vimxx\colors\'
-  
+
 Linux:
 TBD

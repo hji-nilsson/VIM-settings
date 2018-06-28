@@ -1,23 +1,23 @@
-#VIM settings
+# VIM settings
 
 My personal VIM settings. Linux version is not really updated since I mostly work in Windows at the moment.
 
-##External tools
+## External tools
 
 CTAGS - http://prdownloads.sourceforge.net/ctags/ctags58.zip
 CScope - https://sourceforge.net/projects/cscope/files/cscope/15.4/
 
-##Plugins
+## Plugins
 
 NERDtree - http://shawn.hamman.co.nz/wp-content/uploads/2011/08/NERD_tree.zip
 
-##Colorscheme
+## Colorscheme
 
 Dracula - https://github.com/dracula/vim
 
-##Installation instructions
+## Installation instructions
 
-###Windows
+### Windows
 - Place _vimrc in the root of your user profile.
 - Extract CTAGS and CScope and add the location to the PATH environment variable
 - Change path of CScope binary in vimrc_
@@ -27,5 +27,5 @@ Dracula - https://github.com/dracula/vim
   - Extract cotents of directory ‘plugin’ to '<viminstallationdir>\vimXX\plugin\'
 - Download and extract dracula.vim to '<viminstallationdir>\vimxx\colors\'
 
-###Linux
+### Linux
 TBD

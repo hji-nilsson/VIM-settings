@@ -22,6 +22,9 @@ set backspace=indent,eol,start
 autocmd VimEnter,WinEnter * match Error /\%133v.\+/
 autocmd VimEnter,WinEnter * call matchadd("Error", "\\s\\+$")
 
+" Custom commands
+command CleanLineEndings %s/\s\+$//e
+
 " Mapping hotkeys
 map <F2> :NERDTreeToggle <CR>
 map <F5>a :cs find a <cword><CR>

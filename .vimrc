@@ -1,4 +1,4 @@
-" VIM (windows) startup config
+" VIM (Linux) startup config
 set ignorecase
 set smartcase
 set guifont=Courier\ New

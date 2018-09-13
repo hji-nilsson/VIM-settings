@@ -22,9 +22,12 @@ syntax on
 set backspace=indent,eol,start
 autocmd VimEnter,WinEnter * match Error /\%80v.\+/
 autocmd VimEnter,WinEnter * call matchadd("Error", "\\s\\+$")
-hi Error guibg=purple
 
+" Filtype specific rules
 autocmd FileType make setlocal noexpandtab
+autocmd Filetype gitcommit setlocal spell textwidth=72
+
+hi Error guibg=purple
 
 " Custom commands
 command CleanLineEndings %s/\s\+$//e

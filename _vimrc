@@ -12,15 +12,19 @@ set autoindent
 set smartindent
 set guioptions-=T
 set laststatus=2
-set cscopeprg=C:\devtools\bin\cscope.exe
+set cscopeprg=C:\workspace\bin\cscope\cscope.exe
+set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
 
-set tabstop=2 	 " CPAC
-set expandtab 	 " CPAC
-set shiftwidth=2 " CPAC
+set tabstop=4
+set expandtab
+set shiftwidth=4
 syntax on
 set backspace=indent,eol,start
-autocmd VimEnter,WinEnter * match Error /\%133v.\+/
+autocmd VimEnter,WinEnter * match Error /\%80v.\+/
 autocmd VimEnter,WinEnter * call matchadd("Error", "\\s\\+$")
+hi Error guibg=purple
+
+autocmd FileType make setlocal noexpandtab
 
 " Custom commands
 command CleanLineEndings %s/\s\+$//e
@@ -41,10 +45,11 @@ map <F11> :set number! <CR>
 map <F12> :set hls! <CR>
 map <S-LeftMouse> <LeftMouse><S-*>
 map T :tabnew<CR>
+inoremap {<CR>  {<CR>}<Esc>O
 
 fun! ToggleCC()
   if &cc == ''
-    set cc=133
+    set cc=80
   else
     set cc=
   endif

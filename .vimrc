@@ -70,6 +70,8 @@ map <F11> :set number! <CR>
 map <F12> :set hls! <CR>
 map <S-LeftMouse> <LeftMouse><S-*>
 map T :tabnew<CR>
+
+" Auto complete body {}
 inoremap {<CR>  {<CR>}<Esc>O
 
 fun! ToggleCC()

@@ -20,19 +20,35 @@ set guioptions-=T
 set laststatus=2
 set cscopeprg=cscope
 set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
+syntax on
+set backspace=indent,eol,start
 
+" Indentation settings
 set tabstop=4
 set expandtab
 set shiftwidth=4
-syntax on
-set backspace=indent,eol,start
+
+" Highlight column > 80
 autocmd VimEnter,WinEnter * match Error /\%80v.\+/
+
+" Highlight trailing whitespaces
 autocmd VimEnter,WinEnter * call matchadd("Error", "\\s\\+$")
 
-" Filtype specific rules
+" Highlight unwanted tabs
+autocmd VimEnter,WinEnter *.c,*.h :match Error /\t/
+
+" NERDTree settings
+let NERDTreeQuitOnOpen=1
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=1
+
+" Do not use space instead of tabs in makefiles
 autocmd FileType make setlocal noexpandtab
+
+" Autowrap git commit message at 72 columns
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
+" Set error highlight color
 hi Error guibg=purple
 
 " Custom commands

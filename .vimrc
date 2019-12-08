@@ -14,6 +14,14 @@ set cscopeprg=cscope
 autocmd VimEnter * cs add .
 
 " ***Customizing look and behaviour***
+" Timeout for waiting for complete key-codes from terminal.
+" timeoutlen is used for command line and <Leader> maps
+" ttimeoutlen is for normal editing
+set timeout timeoutlen=500 ttimeout ttimeoutlen=20
+
+" set xterm cursor 'color' to value "XtDefaultBackground"
+silent !echo -en '\e]12;XtDefaultBackground\a'
+
 " Cursor settings:
 "  1 -> blinking block
 "  2 -> solid block
@@ -21,9 +29,13 @@ autocmd VimEnter * cs add .
 "  4 -> solid underscore
 "  5 -> blinking vertical bar
 "  6 -> solid vertical bar
-let &t_SI = "\e[5 q"
-let &t_SR = "\e[4 q"
-let &t_EI = "\e[1 q"
+
+" make cursor blink upon startup
+silent !echo -en '\e[1 q'
+let &t_EI="\<Esc>[1 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_SI="\<Esc>[5 q"
+
 
 set ignorecase
 set smartcase

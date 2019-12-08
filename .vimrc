@@ -1,21 +1,38 @@
 " VIM (Linux) startup config
 
-" Run pathogen on startup
+" ***Set path***
+set path +=**
+set wildignore+=**/test/** " Unique per repo
+set wildmenu " Enable fuzzy tab menu
+set complete-=i " Don't use autocomplete on includes
+
+" ***Run pathogen on startup***
 execute pathogen#infect()
 
-" Close buffer if only NerdTree remains open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" ***Configure cscope***
+set cscopeprg=cscope
+autocmd VimEnter * cs add .
 
-" Customizing look and behaviour
+" ***Customizing look and behaviour***
+" Cursor settings:
+"  1 -> blinking block
+"  2 -> solid block
+"  3 -> blinking underscore
+"  4 -> solid underscore
+"  5 -> blinking vertical bar
+"  6 -> solid vertical bar
+let &t_SI = "\e[5 q"
+let &t_SR = "\e[4 q"
+let &t_EI = "\e[1 q"
+
 set ignorecase
 set smartcase
-set guifont=Courier\ New
 set splitright
+set splitbelow
 set ruler
 set autoindent
 set smartindent
 set laststatus=2
-set cscopeprg=cscope
 colorscheme elflord
 
 set tabstop=4
@@ -23,19 +40,34 @@ set expandtab
 set shiftwidth=4
 syntax on
 set backspace=indent,eol,start
-autocmd VimEnter,WinEnter,BufEnter,BufRead *.c,*.h match Error /\%80v.\+/
-autocmd VimEnter,WinEnter * call matchadd("Error", "\\s\\+$")
 
-" Filtype specific rules
+hi Error cTermFg=black
+hi Error cTermBg=lightred
+
+" Special formatting settings
 autocmd FileType make setlocal noexpandtab
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
-hi Error guibg=purple
+" Highlight formatting errors
+augroup hi_format_errors
+    autocmd!
+    autocmd BufNewFile,BufRead * match " Reset matches for error highlight
+    autocmd BufNewFile,BufRead *.c,*.h match Error /\%121v.\+/ " Highlight long lines
+    autocmd BufNewFile,BufRead *.py match Error /\%80v.\+/ " Highlight long lines
+    autocmd VimEnter,WinEnter * call matchadd("Error", "\\s\\+$") "Highligt trailing chars
+augroup END
 
-" Custom commands
+" Close buffer if only NerdTree remains open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" ***Custom commands***
 command CleanLineEndings %s/\s\+$//e
 
-" Mapping hotkeys
+" ***Mapping hotkeys***
+" Remap to better suite nordic keyboard layout
+map <C-g> <C-]> " Follow tag
+
+" Navigation and tags
 map <F2> :NERDTreeToggle <CR>
 map <F5>a :cs find a <cword><CR>
 map <F5>g :cs find g <cword><CR>
@@ -45,21 +77,24 @@ map <F5>t :cs find t <cword><CR>
 map <F5>d :cs find d <cword><CR>
 map <F6> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 map <C-F6> :let temp="tab stag ".expand('<cword>')<CR>:exec temp<CR>
-map <F9> :cscope kill 0 <CR> :silent !cscope -Rb <CR> :cs add . <CR>
-map <C-F9> :silent !ctags -R <CR>
+map <F9> :cscope kill 0 <CR> :silent !cscope -Rb <CR> :cs add . <CR> :redraw! <CR>
+map <C-F9> :silent !ctags -R <CR> :redraw! <CR>
+map T :tabnew<CR>
+map <S-LeftMouse> <LeftMouse><S-*>
+inoremap {<CR>  {<CR>}<Esc>O
+
+" Toggle visual queues
 map <F11> :set number! <CR>
 map <F12> :set hls! <CR>
-map <S-LeftMouse> <LeftMouse><S-*>
-map T :tabnew<CR>
-inoremap {<CR>  {<CR>}<Esc>O
-nnoremap <C-J> <C-]>
+nnoremap <F3> :call ToggleCC()<CR>
 
+" ***Helper functions***
+" Function to toggle colorcolumn
 fun! ToggleCC()
   if &cc == ''
-    set cc=80
+    set cc=121
   else
     set cc=
   endif
 endfun
 
-nnoremap <F3> :call ToggleCC()<CR>

@@ -82,6 +82,7 @@ augroup hi_format_errors
 augroup END
 
 augroup buffer_actions
+    autocmd!
     " Close buffer if only NerdTree remains open
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
     " Check if file has been changed when entering buffer

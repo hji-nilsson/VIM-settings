@@ -32,10 +32,10 @@ silent !echo -en '\e]12;XtDefaultBackground\a'
 
 " make cursor blink upon startup
 silent !echo -en '\e[1 q'
+" Set cursor to blinking block on insert exit
 let &t_EI="\<Esc>[1 q"
-let &t_SR = "\<Esc>[4 q"
+" Set cursor to blinking underscore on insert entry
 let &t_SI="\<Esc>[5 q"
-
 
 set ignorecase
 set smartcase
@@ -45,35 +45,50 @@ set ruler
 set autoindent
 set smartindent
 set laststatus=2
-colorscheme elflord
-
 set tabstop=4
 set expandtab
 set shiftwidth=4
-syntax on
 set backspace=indent,eol,start
+set number
+syntax on
+colorscheme desert
 
-hi Error cTermFg=black
-hi Error cTermBg=lightred
+" Change error highligt color
+" hi Error cTermFg=black
+" hi Error cTermBg=lightred
 
 " Special formatting settings
-autocmd FileType make setlocal noexpandtab
-autocmd Filetype gitcommit setlocal spell textwidth=72
+augroup local_settings
+    " Clear group to avoid duplicates
+    autocmd!
+    " Use tabs instead of spaces in makefiles
+    autocmd FileType make setlocal noexpandtab
+    " Enable spell check and wrap text on 72 characters for commit messages
+    autocmd Filetype gitcommit setlocal spell textwidth=72
+augroup END
 
 " Highlight formatting errors
 augroup hi_format_errors
+    " Clear group to avoid duplicates
     autocmd!
-    autocmd BufNewFile,BufRead * match " Reset matches for error highlight
-    autocmd BufNewFile,BufRead *.c,*.h match Error /\%121v.\+/ " Highlight long lines
-    autocmd BufNewFile,BufRead *.py match Error /\%80v.\+/ " Highlight long lines
-    autocmd VimEnter,WinEnter * call matchadd("Error", "\\s\\+$") "Highligt trailing chars
+    " Reset matches for error highlight
+    autocmd BufNewFile,BufRead * call clearmatches()
+    " Highlight lines longer than 120 characters for c/h files
+    autocmd BufNewFile,BufRead *.c,*.h match Error /\%121v.\+/
+    " Highlight lines longer than 79 characters for python file
+    autocmd BufNewFile,BufRead *.py match Error /\%80v.\+/
+    " Highlight trailing white space
+    autocmd VimEnter,WinEnter * call matchadd("Error", "\\s\\+$")
 augroup END
 
 " Close buffer if only NerdTree remains open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " ***Custom commands***
-command CleanLineEndings %s/\s\+$//e
+" Quick command to remove all trailing white spaces
+if exists(':CleanLineEndings')
+    command CleanLineEndings %s/\s\+$//e
+    endif
 
 " ***Mapping hotkeys***
 " Remap to better suite nordic keyboard layout
@@ -96,7 +111,8 @@ map <S-LeftMouse> <LeftMouse><S-*>
 inoremap {<CR>  {<CR>}<Esc>O
 
 " Toggle visual queues
-map <F11> :set number! <CR>
+map <C-F11> :set number! <CR>
+map <S-F11> :set relativenumber! <CR>
 map <F12> :set hls! <CR>
 nnoremap <F3> :call ToggleCC()<CR>
 

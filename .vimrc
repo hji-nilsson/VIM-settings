@@ -96,7 +96,7 @@ augroup END
 
 " ***Custom commands***
 " Quick command to remove all trailing white spaces
-if exists(':CleanLineEndings')
+if !exists(':CleanLineEndings')
     command CleanLineEndings %s/\s\+$//e
     endif
 

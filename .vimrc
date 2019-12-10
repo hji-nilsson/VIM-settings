@@ -11,7 +11,12 @@ execute pathogen#infect()
 
 " ***Configure cscope***
 set cscopeprg=cscope
-autocmd VimEnter * cs add .
+
+augroup general_autocmd
+    autocmd!
+    " Source cscope file on startup
+    autocmd VimEnter * cs add .
+augroup END
 
 " ***Customizing look and behaviour***
 " Timeout for waiting for complete key-codes from terminal.

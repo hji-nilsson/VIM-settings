@@ -81,8 +81,12 @@ augroup hi_format_errors
     autocmd VimEnter,WinEnter * call matchadd("Error", "\\s\\+$")
 augroup END
 
-" Close buffer if only NerdTree remains open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup buffer_actions
+    " Close buffer if only NerdTree remains open
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    " Check if file has been changed when entering buffer
+    autocmd bufenter * checktime
+augroup END
 
 " ***Custom commands***
 " Quick command to remove all trailing white spaces
